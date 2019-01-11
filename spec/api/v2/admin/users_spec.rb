@@ -90,7 +90,7 @@ describe API::V2::Admin::Users do
           uid: experimental_user.uid
         }
         expect(response.status).to eq 400
-        expect(response.body).to eq "{\"error\":\"state is missing, state is empty\"}"
+        expect(response.body).to eq "{\"error\":\"state, otp, role are missing, exactly one parameter must be provided\"}"
       end
 
       it 'renders error if uid is incorrect' do
@@ -116,8 +116,8 @@ describe API::V2::Admin::Users do
           uid: experimental_user.uid,
           state: "pending"
         }
-        expect(response.status).to eq 403
-        expect(response.body).to eq "{\"error\":\"State already setted to this\"}"
+        expect(response.status).to eq 422
+        expect(response.body).to eq "{\"error\":\"Can't change state, as its already pending\"}"
       end
     end
   end
