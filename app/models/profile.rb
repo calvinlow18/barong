@@ -31,7 +31,7 @@ class Profile < ApplicationRecord
                        format: { with: /\A[A-Z\d\s-]+\z/ },
                        if: proc { |a| a.postcode.present? }
 
-  validates :address, format: { with: /\A[A-Za-z\d\s\.,']+\z/ },
+  validates :address, format: { with: /\A[A-Za-z\d\s\.,'\/]+\z/ },
                       if: proc { |a| a.address.present? }
 
   scope :kept, -> { joins(:account).where(accounts: { discarded_at: nil }) }
