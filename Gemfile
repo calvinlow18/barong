@@ -25,6 +25,7 @@ gem 'twilio-ruby',  '~> 5.6.0'
 
 gem 'fog-google',  '~> 0.1.0'
 gem 'fog-aws',     '~> 2.0.1'
+gem 'fog-aliyun',     '~> 0.3.2'
 gem 'carrierwave', '~> 1.2.2'
 
 gem 'vault', '~> 0.1'
