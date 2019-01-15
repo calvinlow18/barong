@@ -32,9 +32,10 @@
         <th>Level</th>
         <th>Labels</th>
         <th>Last sign in</th>
-        <% if can?(:update, Account) || can?(:destroy, Account) %>
+        <!--<% if can?(:update, Account) || can?(:destroy, Account) %>
           <th colspan=3></th>
-        <% end %>
+        <% end %>-->
+        <th colspan=2></th>
       </tr>
     </thead>
     <tbody>
@@ -46,13 +47,23 @@
           <td><%= account.level %></td>
           <td><%= label_tags(account) %></td>
           <td><%= account.last_sign_in_at.to_s(:long) if account.last_sign_in_at? %></td>
-          <% if can? :update, account %>
-            <td><%= link_to 'Edit', edit_admin_account_path(account.id),  class: 'btn btn-primary btn-sm'  %></td>
-          <% end %>
+          <!-- <% if can? :update, account %>
+            <td>
+              <%= link_to 'Edit', edit_admin_account_path(account.id),  class: 'btn btn-primary btn-sm' %>
+            </td>
+          <% end %> -->
 
-          <% if can? :destroy, account %>
+          <!-- <% if can? :destroy, account %>
             <td><%= link_to 'Delete', admin_account_path(account.id), method: :delete, class: 'btn btn-danger btn-sm', data: {confirm: 'Are you sure?'} %></td>
-          <% end %>
+          <% end %> -->
+          <td>
+            <%= link_to 'Edit', edit_admin_account_path(account.id),  class: "btn btn-primary btn-sm #{'disabled' unless can? :update, account}" %>
+          </td>
+
+          <td>
+            <%= link_to 'Delete', admin_account_path(account.id), method: :delete,  class: "btn btn-danger btn-sm #{'disabled' unless can? :destroy, account}", data: {confirm: 'Are you sure?'} %>
+          </td>
+
 
           </tr>
       <% end %>
