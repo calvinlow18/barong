@@ -2,7 +2,8 @@
 
 # It's for upload document for Document model
 class UploadUploader < CarrierWave::Uploader::Base
-  if Rails.env.production?
+  # if Rails.env.production?
+  if ["AWS", "Aliyun", "Google"].include?(ENV['STORAGE_PROVIDER'])
     storage :fog
   else
     storage :file
@@ -25,12 +26,12 @@ class UploadUploader < CarrierWave::Uploader::Base
   end
 
   # Override default 'publicly visible' policy of fog
-  def fog_public
-    false # (default is true)
-  end
+  # def fog_public
+  #   true # (default is true)
+  # end
 
   # Set the expire time of authentification signature
-  def fog_authenticated_url_expiration
-    1.minutes # in seconds from now,  (default is 10.minutes)
-  end
+  # def fog_authenticated_url_expiration
+  #   1.minutes # in seconds from now,  (default is 10.minutes)
+  # end
 end
